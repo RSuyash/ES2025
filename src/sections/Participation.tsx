@@ -2,8 +2,14 @@
 import Section from "../components/ui/Section"
 import { Button } from "../components/ui/Button"
 import { Check, ArrowRight } from "lucide-react"
+import { useState } from "react"
+import { Modal } from "../components/ui/Modal"
+import { AbstractSubmissionWizard } from "../components/wizards/AbstractSubmissionWizard"
+import { RegistrationWizard } from "../components/wizards/RegistrationWizard"
 
 const Participation = () => {
+    const [wizardOpen, setWizardOpen] = useState<'abstract' | 'register' | null>(null);
+
     return (
         <Section id="participate" className="bg-slate-50">
             <div className="text-center mb-16">
@@ -30,7 +36,7 @@ const Participation = () => {
                         ))}
                     </ul>
 
-                    <Button className="w-full gap-2" size="lg">
+                    <Button className="w-full gap-2" size="lg" onClick={() => setWizardOpen('abstract')}>
                         Submit Abstract <ArrowRight className="w-4 h-4" />
                     </Button>
                 </div>
@@ -53,11 +59,28 @@ const Participation = () => {
                         ))}
                     </ul>
 
-                    <Button variant="outline" className="w-full gap-2 border-slate-300" size="lg">
+                    <Button variant="outline" className="w-full gap-2 border-slate-300" size="lg" onClick={() => setWizardOpen('register')}>
                         Register Now <ArrowRight className="w-4 h-4" />
                     </Button>
                 </div>
             </div>
+
+            {/* Wizards */}
+            <Modal
+                isOpen={wizardOpen === 'abstract'}
+                onClose={() => setWizardOpen(null)}
+                title="Submit Your Abstract"
+            >
+                <AbstractSubmissionWizard onClose={() => setWizardOpen(null)} />
+            </Modal>
+
+            <Modal
+                isOpen={wizardOpen === 'register'}
+                onClose={() => setWizardOpen(null)}
+                title="Conference Registration"
+            >
+                <RegistrationWizard onClose={() => setWizardOpen(null)} />
+            </Modal>
         </Section>
     )
 }
