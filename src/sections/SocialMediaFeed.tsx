@@ -19,7 +19,7 @@ const SocialPostMock = ({ platform, date }: { platform: "instagram" | "linkedin"
         <div className="aspect-square bg-slate-50 relative group">
             {platform === 'instagram' ? (
                 <div className="absolute inset-0 p-4 flex items-center justify-center text-center bg-gradient-to-br from-slate-100 to-slate-200">
-                    <span className="font-serif font-bold text-slate-700 italic">"Gearing up for #ES2025! 🌍"</span>
+                    <span className="font-serif font-bold text-slate-700 italic">"Gearing up for #ES2026! 🌍"</span>
                 </div>
             ) : (
                 <div className="absolute inset-0 p-4 flex flex-col items-center justify-center text-center bg-blue-50/50">

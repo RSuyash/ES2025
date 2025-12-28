@@ -43,7 +43,7 @@ const Navbar = () => {
                     />
                     <div className="leading-tight">
                         <h1 className="font-serif font-bold text-xl text-slate-900 tracking-tight">EnviroSummit</h1>
-                        <p className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">2025 • MIT-WPU</p>
+                        <p className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">2026 • MIT-WPU</p>
                     </div>
                 </div>
 

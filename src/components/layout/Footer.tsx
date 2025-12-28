@@ -15,7 +15,7 @@ const Footer = () => {
                                     className="h-10 w-auto"
                                 />
                             </div>
-                            <h2 className="font-serif text-xl text-white font-bold leading-tight">EnviroSummit<br /><span className="text-primary font-sans text-sm">2025</span></h2>
+                            <h2 className="font-serif text-xl text-white font-bold leading-tight">EnviroSummit<br /><span className="text-primary font-sans text-sm">2026</span></h2>
                         </div>
                         <p className="text-sm text-slate-400 mb-6">
                             Bridging the gap between academic research and sustainable action.
@@ -60,7 +60,7 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-slate-800 mt-12 pt-8 text-center text-xs text-slate-500">
-                    © 2025 EnviroSummit · MIT-WPU. All rights reserved.
+                    © 2026 EnviroSummit · MIT-WPU. All rights reserved.
                 </div>
             </div>
         </footer>

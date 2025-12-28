@@ -13,7 +13,7 @@ const Hero = () => {
 
             <Section className="relative z-10 text-center" width="narrow">
                 <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6 border border-primary/20">
-                    International Conference • 2025
+                    International Conference • 2026
                 </span>
 
                 <h1 className="font-serif text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight">
@@ -58,7 +58,7 @@ const Hero = () => {
                     <div>•</div>
                     <div>Pune, India</div>
                     <div>•</div>
-                    <div>Jan 2025</div>
+                    <div>Jan 2026</div>
                 </div>
             </Section>
         </div>
