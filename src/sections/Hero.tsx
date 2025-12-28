@@ -3,8 +3,36 @@ import { Button } from "../components/ui/Button"
 import Section from "../components/ui/Section"
 import { FileText, Users } from "lucide-react"
 import { HeroBackground } from "../components/ui/HeroBackground"
+import { Butterfly } from "../components/ui/Butterfly"
+import { useEffect, useRef, useState } from "react"
 
 const Hero = () => {
+    const eRef = useRef<HTMLSpanElement>(null);
+    const [targetPos, setTargetPos] = useState<{ x: number, y: number } | null>(null);
+
+    useEffect(() => {
+        // Delay to ensure layout is stable
+        const timer = setTimeout(() => {
+            if (eRef.current) {
+                const rect = eRef.current.getBoundingClientRect();
+                setTargetPos({ x: rect.left, y: rect.top });
+            }
+        }, 1000);
+
+        const handleResize = () => {
+            if (eRef.current) {
+                const rect = eRef.current.getBoundingClientRect();
+                setTargetPos({ x: rect.left, y: rect.top });
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            clearTimeout(timer);
+        };
+    }, []);
+
     return (
         <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
             {/* Background Overlay - Abstract Academic */}
@@ -16,9 +44,16 @@ const Hero = () => {
                     International Conference • 2026
                 </span>
 
-                <h1 className="font-serif text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight">
-                    Enviro<span className="text-primary">Summit</span>
+                <h1 className="font-serif text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight relative">
+                    <span className="relative inline-block">
+                        <span ref={eRef} className="text-primary">E</span>
+                        nviro
+                    </span>
+                    <span className="text-primary">Summit</span>
                 </h1>
+
+                {/* The Butterfly Visitor */}
+                <Butterfly targetPos={targetPos} />
 
                 <p className="text-xl md:text-2xl text-slate-600 mb-8 font-light text-balance max-w-2xl mx-auto leading-relaxed">
                     Bridging the gap between academic research, policy frameworks, and sustainable community action.
