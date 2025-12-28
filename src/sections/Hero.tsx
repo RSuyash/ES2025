@@ -3,7 +3,6 @@ import { Button } from "../components/ui/Button"
 import Section from "../components/ui/Section"
 import { FileText, Users } from "lucide-react"
 import { HeroBackground } from "../components/ui/HeroBackground"
-import { Butterfly } from "../components/ui/Butterfly"
 import { useEffect, useRef, useState } from "react"
 
 const Hero = () => {
@@ -51,9 +50,6 @@ const Hero = () => {
                     </span>
                     <span className="text-primary">Summit</span>
                 </h1>
-
-                {/* The Butterfly Visitor */}
-                <Butterfly targetPos={targetPos} />
 
                 <p className="text-xl md:text-2xl text-slate-600 mb-8 font-light text-balance max-w-2xl mx-auto leading-relaxed">
                     Bridging the gap between academic research, policy frameworks, and sustainable community action.
