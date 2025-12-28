@@ -1,24 +1,28 @@
 
 import Section from "../components/ui/Section"
 
-const speakers = [
+interface Speaker {
+    name: string;
+    role: string;
+    institution: string;
+    image?: string;
+}
+
+const speakers: Speaker[] = [
     {
-        name: "Dr. Prasad Kulkarni",
-        role: "Sustainable Development Expert",
-        institution: "Director, Environment Education",
-        image: "/assets/images/speaker-placeholder-1.png"
+        name: "Dr. Arun Varma",
+        role: "Policy & Governance Lead",
+        institution: "Director, Institute of Green Policy",
     },
     {
-        name: "Dr. Soma Mishra",
-        role: "Founder, SustainOEarth",
-        institution: "Environmental Scientist",
-        image: "/assets/images/speaker-placeholder-3.png"
+        name: "Dr. Priya Singh",
+        role: "Climate Scientist",
+        institution: "Senior Researcher, National Science Centre",
     },
     {
-        name: "Dr. Pankaj Koparde",
-        role: "Evolutionary Ecologist",
-        institution: "Chatur Ullu Lab / MIT-WPU",
-        image: "/assets/images/speaker-placeholder-2.png"
+        name: "Dr. Rahul Deshmukh",
+        role: "Conservation Biologist",
+        institution: "Wildlife Research Foundation",
     }
 ]
 
@@ -36,8 +40,15 @@ const Speakers = () => {
                 {speakers.map((speaker, index) => (
                     <div key={index} className="flex flex-col items-center text-center group">
                         <div className="w-40 h-40 rounded-full overflow-hidden mb-4 border-4 border-slate-50 shadow-sm group-hover:border-primary/20 transition-colors">
-                            <div className="w-full h-full bg-slate-200">
-                                <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
+                            <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
+                                {/* @ts-ignore - 'image' property might be missing */}
+                                {speaker.image ? (
+                                    <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
+                                ) : (
+                                    <svg className="w-20 h-20" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                )}
                             </div>
                         </div>
                         <h3 className="font-serif text-lg font-bold text-slate-900">{speaker.name}</h3>

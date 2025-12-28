@@ -2,6 +2,7 @@
 import Layout from './components/layout/Layout'
 import Hero from './sections/Hero'
 import Mission from './sections/Mission'
+import PastSummit from './sections/PastSummit'
 import ValueProps from './sections/ValueProps'
 import SocialProof from './sections/SocialProof'
 import Tracks from './sections/Tracks'
@@ -14,6 +15,7 @@ function App() {
     <Layout>
       <Hero />
       <Mission />
+      <PastSummit />
       <ValueProps />
       <SocialProof />
       <Tracks />

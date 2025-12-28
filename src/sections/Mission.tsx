@@ -28,13 +28,13 @@ const Mission = () => {
                     <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-secondary/5 rounded-full z-0"></div>
 
                     {/* Image Container */}
-                    <div className="relative z-10 aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden shadow-sm border border-slate-100">
-                        <img src="/assets/images/mission-panel.png" alt="Past Panel Discussion" className="w-full h-full object-cover" />
+                    <div className="relative z-10 aspect-video md:aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden shadow-sm border border-slate-100 max-w-md mx-auto md:ml-auto">
+                        <img src="/assets/images/es2024/Panel.png" alt="Past Panel Discussion" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Quote Card */}
-                    <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-lg shadow-lg max-w-xs border border-slate-100 hidden md:block z-20">
-                        <p className="font-serif italic text-slate-700 text-sm">
+                    <div className="relative mt-4 mx-4 md:mx-0 md:absolute md:-bottom-8 md:-left-8 bg-white p-6 rounded-lg shadow-lg max-w-xs border border-slate-100 z-20">
+                        <p className="font-serif italic text-slate-700 text-sm leading-relaxed">
                             "A unique platform where student research stands shoulder-to-shoulder with expert insights."
                         </p>
                         <p className="text-xs text-slate-400 mt-3 font-semibold uppercase tracking-wider">
