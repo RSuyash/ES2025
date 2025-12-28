@@ -33,7 +33,7 @@ const Mission = () => {
                     </div>
 
                     {/* Quote Card */}
-                    <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-lg shadow-lg max-w-xs border border-slate-100 hidden md:block">
+                    <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-lg shadow-lg max-w-xs border border-slate-100 hidden md:block z-20">
                         <p className="font-serif italic text-slate-700 text-sm">
                             "A unique platform where student research stands shoulder-to-shoulder with expert insights."
                         </p>
