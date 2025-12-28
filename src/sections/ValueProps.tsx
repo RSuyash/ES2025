@@ -1,5 +1,5 @@
-import React from "react"
-import Section from "../ui/Section"
+
+import Section from "../components/ui/Section"
 import { Mic2, Award, Users, Globe2 } from "lucide-react"
 
 const benefits = [

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "../ui/Button"
 import { cn } from "../../lib/utils"
 // import { Menu, X } from "lucide-react" // Will uncomment when deps are confirmed installed
@@ -35,9 +35,12 @@ const Navbar = () => {
                 {/* Logo Area */}
                 <div className="flex items-center gap-2">
                     {/* Placeholder for Logo */}
-                    <div className="h-10 w-10 bg-primary/10 rounded-md flex items-center justify-center text-primary font-bold">
-                        ES
-                    </div>
+                    {/* Logo */}
+                    <img
+                        src="/assets/icons/logo_1.png"
+                        alt="EnviroSummit Logo"
+                        className="h-12 w-auto object-contain"
+                    />
                     <div className="leading-tight">
                         <h1 className="font-serif font-bold text-xl text-slate-900 tracking-tight">EnviroSummit</h1>
                         <p className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">2025 • MIT-WPU</p>

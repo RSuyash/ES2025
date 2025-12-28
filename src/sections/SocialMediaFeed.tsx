@@ -1,7 +1,7 @@
-import React from "react"
-import Section from "../ui/Section"
+
+import Section from "../components/ui/Section"
 import { Instagram, Linkedin, ExternalLink } from "lucide-react"
-import { Button } from "../ui/Button"
+import { Button } from "../components/ui/Button"
 
 const SocialPostMock = ({ platform, date }: { platform: "instagram" | "linkedin", date: string }) => (
     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
@@ -16,10 +16,20 @@ const SocialPostMock = ({ platform, date }: { platform: "instagram" | "linkedin"
             </div>
         </div>
         {/* Content Placeholder */}
-        <div className="aspect-square bg-slate-50 flex items-center justify-center group relative">
-            <span className="text-slate-300 text-xs">Post Content / Image</span>
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <ExternalLink className="text-white drop-shadow-md" size={24} />
+        <div className="aspect-square bg-slate-50 relative group">
+            {platform === 'instagram' ? (
+                <div className="absolute inset-0 p-4 flex items-center justify-center text-center bg-gradient-to-br from-slate-100 to-slate-200">
+                    <span className="font-serif font-bold text-slate-700 italic">"Gearing up for #ES2025! 🌍"</span>
+                </div>
+            ) : (
+                <div className="absolute inset-0 p-4 flex flex-col items-center justify-center text-center bg-blue-50/50">
+                    <span className="font-sans font-semibold text-blue-900 text-sm">Keynote Announcement</span>
+                    <span className="text-xs text-blue-700 mt-1">Dr. S. Wanner confirmed!</span>
+                </div>
+            )}
+
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer">
+                <ExternalLink className="text-slate-900 drop-shadow-sm" size={24} />
             </div>
         </div>
         {/* Footer */}

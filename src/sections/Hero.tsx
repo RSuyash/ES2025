@@ -1,22 +1,15 @@
-import React from "react"
-import { Button } from "../ui/Button"
-import Section from "../ui/Section"
-import { ArrowRight, FileText, Users } from "lucide-react"
+
+import { Button } from "../components/ui/Button"
+import Section from "../components/ui/Section"
+import { FileText, Users } from "lucide-react"
+import { HeroBackground } from "../components/ui/HeroBackground"
 
 const Hero = () => {
     return (
-        <div className="relative min-h-[90vh] flex items-center justify-center bg-slate-50 overflow-hidden">
+        <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
             {/* Background Overlay - Abstract Academic */}
-            <div className="absolute inset-0 z-0">
-                {/* Placeholder for the blurry academic shot */}
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-50/90 to-slate-100/90 z-10"></div>
-                {/* This image src should be replaced by real asset */}
-                <img
-                    src="/assets/images/hero-bg-placeholder.jpg"
-                    alt="EnviroSummit Background"
-                    className="w-full h-full object-cover opacity-20 filter grayscale"
-                />
-            </div>
+            {/* Background Overlay - Breathing Topography */}
+            <HeroBackground />
 
             <Section className="relative z-10 text-center" width="narrow">
                 <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6 border border-primary/20">

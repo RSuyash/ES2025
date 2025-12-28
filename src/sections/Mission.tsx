@@ -1,5 +1,5 @@
-import React from "react"
-import Section from "../ui/Section"
+
+import Section from "../components/ui/Section"
 
 const Mission = () => {
     return (
@@ -29,11 +29,7 @@ const Mission = () => {
 
                     {/* Image Container */}
                     <div className="relative z-10 aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden shadow-sm border border-slate-100">
-                        {/* Real image of a past panel discussion goes here */}
-                        <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-50">
-                            <span className="text-xs uppercase tracking-widest">Image: Past Panel Discussion</span>
-                        </div>
-                        {/* <img src="/assets/images/mission-panel.jpg" className="w-full h-full object-cover" /> */}
+                        <img src="/assets/images/mission-panel.png" alt="Past Panel Discussion" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Quote Card */}

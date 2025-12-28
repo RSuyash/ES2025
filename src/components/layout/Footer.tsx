@@ -1,4 +1,4 @@
-import React from "react"
+
 
 const Footer = () => {
     return (
@@ -7,7 +7,16 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand */}
                     <div className="col-span-1 md:col-span-1">
-                        <h2 className="font-serif text-2xl text-white font-bold mb-4">EnviroSummit<span className="text-primary font-sans text-sm align-top">2025</span></h2>
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="bg-white p-1.5 rounded-lg w-fit">
+                                <img
+                                    src="/assets/icons/logo_1.png"
+                                    alt="EnviroSummit Logo"
+                                    className="h-10 w-auto"
+                                />
+                            </div>
+                            <h2 className="font-serif text-xl text-white font-bold leading-tight">EnviroSummit<br /><span className="text-primary font-sans text-sm">2025</span></h2>
+                        </div>
                         <p className="text-sm text-slate-400 mb-6">
                             Bridging the gap between academic research and sustainable action.
                         </p>
