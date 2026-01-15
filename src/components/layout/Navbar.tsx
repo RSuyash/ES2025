@@ -21,6 +21,7 @@ const Navbar = () => {
     const navLinks = [
         { name: "Mission", href: "/#mission", type: "anchor" },
         { name: "Themes", href: "/#themes", type: "anchor" },
+        { name: "Speakers", href: "/#speakers", type: "anchor" },
         { name: "Committee", href: "/#advisory-committee", type: "anchor" },
         // { name: "Participate", href: "/#participate", type: "anchor" },
     ]
