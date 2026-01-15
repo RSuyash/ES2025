@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnviroSummit 2026 | Spotlight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --green-deep: #1a4d2e;
+            --green-leaf: #4a7c59;
+            --gold: #c5a059;
+            --cream: #f4f1ea;
+            --white-glass: rgba(255, 255, 255, 0.85);
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-color: var(--cream);
+            font-family: var(--font-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--green-deep);
+            /* Organic gradient background */
+            background: radial-gradient(circle at 50% 120%, #d4e6d9 0%, var(--cream) 60%);
+        }
+
+        /* Subtle animated texture */
+        .texture-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Decoration Leaves (CSS Shapes) */
+        .leaf-deco {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .leaf-1 {
+            top: -10%;
+            left: -5%;
+            width: 400px;
+            transform: rotate(45deg);
+        }
+
+        .leaf-2 {
+            bottom: -10%;
+            right: -5%;
+            width: 500px;
+            transform: rotate(225deg);
+        }
+
+        /* MAIN CONTAINER */
+        .stage {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* --- TOP SECTION: HEADER & TIMER --- */
+        .timer-unit {
+            text-align: center;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .brand {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--green-leaf);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .main-timer {
+            font-family: var(--font-head);
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(180deg, var(--green-deep) 0%, #2c5c40 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-variant-numeric: tabular-nums;
+            margin-bottom: 5px;
+            text-shadow: 0 10px 30px rgba(26, 77, 46, 0.15);
+        }
+
+        .timer-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        /* Buffer State Styles */
+        .timer-label.buffer-active {
+            background: var(--gold);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+            animation: pulse-gold 2s infinite;
+        }
+
+        /* --- MIDDLE SECTION: FLOATING COMMITTEE CARD --- */
+        .card-stage {
+            width: 100%;
+            height: 320px;
+            /* Fixed height to prevent jumping */
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .committee-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 650px;
+            background: var(--white-glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px 60px 20px 60px;
+            /* Organic leaf shape corners */
+            box-shadow: 0 20px 50px rgba(26, 77, 46, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            text-align: center;
+            opacity: 0;
+            /* Hidden by default */
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Card Active State */
+        .committee-card.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Card Exit State */
+        .committee-card.exit {
+            opacity: 0;
+            transform: translate(-50%, -40%) scale(0.95);
+        }
+
+        /* Card Enter State */
+        .committee-card.enter {
+            opacity: 0;
+            transform: translate(-50%, -60%) scale(1.05);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--gold), #e0c582);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: var(--green-deep);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .chair-container {
+            display: inline-block;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .chair-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .chair-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gold);
+            border-bottom: 2px solid rgba(197, 160, 89, 0.3);
+            padding-bottom: 5px;
+        }
+
+        .members-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            font-size: 1rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Progress Bar for Carousel */
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 0 0 20px 60px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gold);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* --- BOTTOM ACTIONS --- */
+        .action-bar {
+            margin-top: 10px;
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .btn-meet {
+            text-decoration: none;
+            color: var(--green-deep);
+            border: 1px solid var(--green-deep);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-meet:hover {
+            background: var(--green-deep);
+            color: white;
+        }
+
+        .btn-magic {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .btn-magic:hover {
+            transform: translateY(-3px);
+        }
+
+
+        /* --- OVERLAY --- */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a4d2e;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s;
+        }
+
+        #overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .overlay-text {
+            color: var(--gold);
+            font-family: var(--font-head);
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        /* KEYFRAMES */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-gold {
+            0% {
+                box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(197, 160, 89, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="texture-overlay"></div>
+
+    <svg class="leaf-deco leaf-1" viewBox="0 0 100 100">
+        <path d="M50 0 C20 0 0 20 0 50 C0 80 20 100 50 100 C80 100 100 80 100 50 C100 20 80 0 50 0 Z" fill="#1a4d2e" />
+    </svg>
+    <svg class="leaf-deco leaf-2" viewBox="0 0 100 100">
+        <path d="M50 0 C20 0 0 20 0 50 C0 80 20 100 50 100 C80 100 100 80 100 50 C100 20 80 0 50 0 Z" fill="#c5a059" />
+    </svg>
+
+    <div class="stage">
+
+        <div class="timer-unit">
+            <div class="brand">EnviroSummit 2026</div>
+            <div class="main-timer" id="timer">00:00:00</div>
+            <div class="timer-label" id="timer-label">Meeting Countdown</div>
+        </div>
+
+        <div class="card-stage" id="card-container">
+        </div>
+
+        <div class="action-bar">
+            <a href="https://meet.google.com/yza-rzgn-rzc" target="_blank" class="btn-meet">Open Link</a>
+            <button class="btn-magic" onclick="startMeeting()">✨ Start Meeting</button>
+        </div>
+
+    </div>
+
+    <div id="overlay">
+        <canvas id="confetti" style="position:absolute; top:0; left:0; width:100%; height:100%;"></canvas>
+        <div class="overlay-text">
+            <div>MEETING STARTED</div>
+            <div style="font-size: 1.5rem; font-family: 'Montserrat'; color: #fff; margin-top:20px;">Let's build the
+                legacy.</div>
+        </div>
+        <button onclick="document.getElementById('overlay').classList.remove('active')"
+            style="margin-top:30px; background:transparent; color:#fff; border:1px solid #fff; padding:10px 30px; border-radius:30px; cursor:pointer;">Close</button>
+    </div>
+
+    <script>
+        /* --- 1. DATA: COMMITTEES --- */
+        const committees = [
+            {
+                title: "Registration & Kit",
+                chair: "Sakshi Palav",
+                icon: "🎒",
+                members: ["Pragya Mishra", "Vishvambhara Surve"]
+            },
+            {
+                title: "IT Resource",
+                chair: "Suyash Rahegaonkar",
+                icon: "💻",
+                members: ["Prajakta Jadhav", "Viraj Chaudhari", "Ayush Mishra"]
+            },
+            {
+                title: "Logistics & Operations",
+                chair: "Krishnandu Sarkar",
+                icon: "🚚",
+                members: ["Arjun P Nambiar", "Sharvari Tate", "Dhruva Bhat", "Aniket Padwalkar"]
+            },
+            {
+                title: "Abstract Book",
+                chair: "Pragya",
+                icon: "📚",
+                members: ["Shital Lashkare"]
+            },
+            {
+                title: "Food Committee",
+                chair: "Niyanta Kore",
+                icon: "🥗",
+                members: ["Jampala Charitha", "Vijaya Dharshini", "Jampala Shalini"]
+            },
+            {
+                title: "Social Media & Design",
+                chair: "Shreya Joshi",
+                icon: "🎨",
+                members: ["Juii Dicholkar", "Aditya Roy", "Jayashree Donne", "Arnav Ingule"]
+            }
+        ];
+
+        /* --- 2. TIMER LOGIC --- */
+        const targetTime = new Date();
+        targetTime.setHours(15, 30, 0, 0); // 3:30 PM
+
+        const graceTime = new Date();
+        graceTime.setHours(15, 40, 0, 0); // 3:40 PM
+
+        function updateTimer() {
+            const now = new Date();
+            const timerEl = document.getElementById("timer");
+            const labelEl = document.getElementById("timer-label");
+
+            // Phase 1: Before 3:30
+            if (now < targetTime) {
+                let diff = targetTime - now;
+                timerEl.innerText = formatTime(diff);
+                labelEl.innerText = "Meeting Begins In";
+                labelEl.classList.remove('buffer-active');
+            }
+            // Phase 2: Grace Period (3:30 to 3:40)
+            else if (now >= targetTime && now < graceTime) {
+                let diff = graceTime - now;
+                timerEl.innerText = formatTime(diff);
+                timerEl.style.color = "var(--gold)"; // Change text color
+
+                labelEl.innerText = "Grace Period Ending In";
+                labelEl.classList.add('buffer-active');
+            }
+            // Phase 3: Meeting Started
+            else {
+                timerEl.innerText = "LIVE";
+                labelEl.innerText = "Session Active";
+                labelEl.classList.remove('buffer-active');
+                labelEl.style.background = "var(--green-deep)";
+                labelEl.style.color = "white";
+            }
+        }
+
+        function formatTime(ms) {
+            const h = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((ms % (1000 * 60)) / 1000);
+            return (h > 0 ? String(h).padStart(2, '0') + ":" : "") +
+                String(m).padStart(2, '0') + ":" +
+                String(s).padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        /* --- 3. CAROUSEL LOGIC --- */
+        let currentIndex = 0;
+        const container = document.getElementById('card-container');
+        const slideDuration = 6000; // 6 seconds per slide
+
+        function createCard(data) {
+            const div = document.createElement('div');
+            div.className = 'committee-card enter'; // Start in 'enter' state
+            div.innerHTML = `
+                <div class="card-icon">${data.icon}</div>
+                <div class="card-title">${data.title}</div>
+                <div class="chair-container">
+                    <span class="chair-label">Chairperson</span>
+                    <span class="chair-name">${data.chair}</span>
+                </div>
+                <div class="members-grid">
+                    ${data.members.map(m => `<span>• ${m}</span>`).join('')}
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+            `;
+            return div;
+        }
+
+        function showCard(index) {
+            // Remove old cards (clean up)
+            const oldCards = document.querySelectorAll('.committee-card');
+            oldCards.forEach(c => {
+                c.classList.remove('active', 'enter');
+                c.classList.add('exit');
+                setTimeout(() => c.remove(), 800); // Wait for exit anim then remove
+            });
+
+            // Add new card
+            const newCard = createCard(committees[index]);
+            container.appendChild(newCard);
+
+            // Trigger reflow to enable transition
+            requestAnimationFrame(() => {
+                newCard.classList.remove('enter');
+                newCard.classList.add('active');
+
+                // Animate progress bar
+                setTimeout(() => {
+                    const bar = newCard.querySelector('.progress-bar');
+                    if (bar) bar.style.width = '100%';
+                }, 100);
+            });
+        }
+
+        function cycleCommittees() {
+            showCard(currentIndex);
+            currentIndex = (currentIndex + 1) % committees.length;
+        }
+
+        // Initialize Carousel
+        cycleCommittees();
+        setInterval(cycleCommittees, slideDuration);
+
+        /* --- 4. START ANIMATION (CONFETTI) --- */
+        function startMeeting() {
+            document.getElementById('overlay').classList.add('active');
+            initConfetti();
+        }
+
+        // Simple Confetti (Embedded to keep single file)
+        function initConfetti() {
+            const canvas = document.getElementById("confetti");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const particles = [];
+
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width, y: -Math.random() * canvas.height,
+                    w: Math.random() * 10 + 5, h: Math.random() * 5 + 5,
+                    color: `hsl(${Math.random() * 50 + 40}, 70%, 50%)`, // Gold hues
+                    vy: Math.random() * 2 + 2, vx: Math.random() * 2 - 1
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.y += p.vy; p.x += p.vx;
+                    if (p.y > canvas.height) p.y = -10;
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.w, p.h);
+                });
+                if (document.getElementById('overlay').classList.contains('active')) requestAnimationFrame(draw);
+            }
+            draw();
+        }
+    </script>
+</body>
+
+</html>
