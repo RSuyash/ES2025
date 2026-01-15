@@ -6,6 +6,7 @@ import PastSummit from './sections/PastSummit'
 import ValueProps from './sections/ValueProps'
 import SocialProof from './sections/SocialProof'
 import Participation from './sections/Participation'
+import { SummitProvider } from './context/SummitContext'
 
 // Lazy Load Heavy Sections
 const ConferenceThemes = lazy(() => import('./sections/themes/ConferenceThemes'))
@@ -14,18 +15,20 @@ const SocialMediaFeed = lazy(() => import('./sections/SocialMediaFeed'))
 
 function App() {
   return (
-    <Layout>
-      <Hero />
-      <Mission />
-      <PastSummit />
-      <ValueProps />
-      <SocialProof />
+    <SummitProvider>
+      <Layout>
+        <Hero />
+        <Mission />
+        <PastSummit />
+        <ValueProps />
+        <SocialProof />
 
-      <ConferenceThemes />
-      <ResearchAdvisoryCommittee />
-      <Participation />
-      <SocialMediaFeed />
-    </Layout>
+        <ConferenceThemes />
+        <ResearchAdvisoryCommittee />
+        <Participation />
+        <SocialMediaFeed />
+      </Layout>
+    </SummitProvider>
   )
 }
 

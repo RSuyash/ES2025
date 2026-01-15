@@ -95,7 +95,7 @@ export const PeacockMaximalHero = () => {
                         >
                             <div className="px-3 py-1 rounded-full bg-slate-900 flex items-center gap-1.5 shadow-lg">
                                 <Sparkles size={10} className="text-amber-400" />
-                                <span className="text-[9px] font-bold uppercase tracking-widest text-white">4th Edition</span>
+                                <span className="text-[9px] font-bold uppercase tracking-widest text-white">2th Edition</span>
                             </div>
                             <div className="px-3 py-1 rounded-full bg-white/60 border border-white/60 backdrop-blur-sm text-[9px] font-bold uppercase tracking-widest text-slate-700 shadow-sm">
                                 {CONFERENCE_DATA.year}
@@ -103,17 +103,16 @@ export const PeacockMaximalHero = () => {
                         </motion.div>
 
                         <motion.h1
-                            className="text-5xl md:text-7xl font-serif font-bold text-slate-900 leading-[0.95] tracking-tight"
+                            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-slate-900 leading-[0.9] tracking-tight"
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.1 }}
                         >
-                            Enviro<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-emerald-600 to-amber-500">Summit</span>
+                            Enviro <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-emerald-600 to-amber-500">Summit</span>
                         </motion.h1>
 
                         <motion.p
-                            className="text-lg text-slate-600 font-light leading-relaxed max-w-lg"
+                            className="text-xl text-slate-600 font-light leading-relaxed max-w-xl"
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.2 }}
@@ -122,54 +121,56 @@ export const PeacockMaximalHero = () => {
                         </motion.p>
 
                         <motion.div
-                            className="flex flex-wrap gap-3 mt-2"
+                            className="flex flex-wrap gap-4 mt-3"
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.3 }}
                         >
                             <Button
                                 size="lg"
-                                className="rounded-xl bg-slate-900 text-white h-12 px-6 text-sm font-medium hover:scale-105 transition-transform shadow-xl shadow-slate-900/20"
+                                className="rounded-xl bg-slate-900 text-white h-14 px-8 text-base font-medium hover:scale-105 transition-transform shadow-xl shadow-slate-900/20"
                                 onClick={() => setWizardOpen('abstract')}
                             >
-                                <FileText className="mr-2" size={16} />
+                                <FileText className="mr-2" size={18} />
                                 Submit Abstract
                             </Button>
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="rounded-xl border-2 border-slate-200 bg-white/60 text-slate-800 h-12 px-6 text-sm font-medium hover:border-teal-500 hover:text-teal-700 hover:bg-white"
+                                className="rounded-xl border-2 border-slate-200 bg-white/60 text-slate-800 h-14 px-8 text-base font-medium hover:border-teal-500 hover:text-teal-700 hover:bg-white"
                                 onClick={() => setWizardOpen('register')}
                             >
                                 <span className="mr-2">Register</span>
-                                <ArrowRight size={16} />
+                                <ArrowRight size={18} />
                             </Button>
                         </motion.div>
 
                         {/* Quick Info Strip */}
                         <motion.div
-                            className="flex flex-wrap items-center gap-5 mt-4 pt-5 border-t border-slate-200/60"
+                            className="flex flex-wrap items-center gap-8 mt-6 pt-6 border-t border-slate-200"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.4 }}
                         >
-                            <div className="flex items-center gap-2">
-                                <div className="p-1.5 bg-amber-100/50 rounded-lg">
-                                    <MapPin size={14} className="text-amber-600" />
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 bg-amber-50 rounded-2xl border border-amber-100/50 shadow-sm">
+                                    <MapPin size={24} className="text-amber-600" />
                                 </div>
-                                <div className="text-xs leading-tight">
-                                    <div className="font-bold text-slate-900">Pune, India</div>
-                                    <div className="text-slate-500 text-[10px]">MIT-WPU Campus</div>
+                                <div>
+                                    <div className="text-lg font-bold text-slate-900 leading-none">Pune, India</div>
+                                    <div className="text-sm font-medium text-slate-500 mt-1">MIT-WPU Campus</div>
                                 </div>
                             </div>
-                            <div className="hidden sm:block w-px h-6 bg-slate-200" />
-                            <div className="flex items-center gap-2">
-                                <div className="p-1.5 bg-teal-100/50 rounded-lg">
-                                    <Calendar size={14} className="text-teal-600" />
+
+                            <div className="hidden sm:block w-px h-12 bg-slate-200" />
+
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 bg-teal-50 rounded-2xl border border-teal-100/50 shadow-sm">
+                                    <Calendar size={24} className="text-teal-600" />
                                 </div>
-                                <div className="text-xs leading-tight">
-                                    <div className="font-bold text-slate-900">{CONFERENCE_DATA.dates}</div>
-                                    <div className="text-slate-500 text-[10px]">Hybrid Mode</div>
+                                <div>
+                                    <div className="text-lg font-bold text-slate-900 leading-none">{CONFERENCE_DATA.dates}</div>
+                                    <div className="text-sm font-medium text-slate-500 mt-1">Hybrid Mode</div>
                                 </div>
                             </div>
                         </motion.div>

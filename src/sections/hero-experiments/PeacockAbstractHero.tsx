@@ -1,6 +1,6 @@
 import { Button } from "../../components/ui/Button"
 import Section from "../../components/ui/Section"
-import { FileText, Users, Play, Activity } from "lucide-react"
+import { Play, Activity } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { Modal } from "../../components/ui/Modal"
