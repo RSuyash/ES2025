@@ -2,14 +2,13 @@ import { useState, useEffect } from "react"
 import { Button } from "../ui/Button"
 import { cn } from "../../lib/utils"
 import { useSummit } from "../../context/SummitContext"
-import { Link, useLocation } from "react-router-dom"
-import { Sparkles, Menu, X } from "lucide-react"
+import { Link } from "react-router-dom"
+import { Menu, X } from "lucide-react"
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const { openWizard } = useSummit();
-    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -63,17 +62,6 @@ const Navbar = () => {
                             {link.name}
                         </a>
                     ))}
-                    <Link
-                        to="/track-finder"
-                        className={cn(
-                            "text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 flex items-center gap-2",
-                            location.pathname === '/track-finder'
-                                ? "bg-indigo-100 text-indigo-700 shadow-inner"
-                                : "text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
-                        )}
-                    >
-                        <Sparkles size={14} /> AI Track Finder
-                    </Link>
                 </div>
 
                 {/* CTA */}
@@ -109,13 +97,6 @@ const Navbar = () => {
                             {link.name}
                         </a>
                     ))}
-                    <Link
-                        to="/track-finder"
-                        className="text-left py-2 font-medium text-indigo-600 border-b border-slate-100 flex items-center gap-2"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                        <Sparkles size={16} /> AI Track Finder
-                    </Link>
                     <div className="flex flex-col gap-3 mt-2">
                         <Button className="w-full justify-center" onClick={() => { setIsMobileMenuOpen(false); openWizard('abstract'); }}>Submit Abstract</Button>
                         <Button
@@ -126,8 +107,9 @@ const Navbar = () => {
                         </Button>
                     </div>
                 </div>
-            )}
-        </nav>
+            )
+            }
+        </nav >
     )
 }
 

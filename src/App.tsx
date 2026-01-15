@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import Layout from './components/layout/Layout'
 import { SummitProvider } from './context/SummitContext'
 import Home from './pages/Home'
-import TrackFinder from './pages/TrackFinder'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -24,7 +23,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/track-finder" element={<TrackFinder />} />
+            {/* Add other pages here */}
           </Routes>
         </Layout>
 
