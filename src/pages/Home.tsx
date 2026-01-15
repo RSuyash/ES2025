@@ -9,6 +9,7 @@ import Participation from '../sections/Participation'
 
 // Lazy Load Heavy Sections
 const ConferenceThemes = lazy(() => import('../sections/themes/ConferenceThemes'))
+const PlenarySpeakers = lazy(() => import('../sections/PlenarySpeakers'))
 const ResearchAdvisoryCommittee = lazy(() => import('../sections/ResearchAdvisoryCommittee'))
 const SocialMediaFeed = lazy(() => import('../sections/SocialMediaFeed'))
 
@@ -21,6 +22,7 @@ const Home = () => {
             <ValueProps />
             <SocialProof />
             <ConferenceThemes />
+            <PlenarySpeakers />
             <ResearchAdvisoryCommittee />
             <Participation />
             <SocialMediaFeed />
