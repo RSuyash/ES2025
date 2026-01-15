@@ -2,11 +2,14 @@ import { useState, useEffect } from "react"
 import { Button } from "../ui/Button"
 import { cn } from "../../lib/utils"
 import { useSummit } from "../../context/SummitContext"
-// import { Menu, X } from "lucide-react" 
+import { Link, useLocation } from "react-router-dom"
+import { Sparkles, Menu, X } from "lucide-react"
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const { openWizard } = useSummit();
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,10 +20,10 @@ const Navbar = () => {
     }, [])
 
     const navLinks = [
-        { name: "Mission", href: "#mission" },
-        { name: "Themes", href: "#themes" },
-        { name: "Committee", href: "#advisory-committee" },
-        { name: "Participate", href: "#participate" },
+        { name: "Mission", href: "/#mission", type: "anchor" },
+        { name: "Themes", href: "/#themes", type: "anchor" },
+        { name: "Committee", href: "/#advisory-committee", type: "anchor" },
+        // { name: "Participate", href: "/#participate", type: "anchor" },
     ]
 
     return (
@@ -34,7 +37,7 @@ const Navbar = () => {
         >
             <div className="container mx-auto px-4 flex items-center justify-between">
                 {/* Logo Area */}
-                <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                <Link to="/" className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                     <div className="relative">
                         <div className="absolute inset-0 bg-teal-500 blur-lg opacity-20 group-hover:opacity-40 transition-opacity rounded-full" />
                         <img
@@ -47,7 +50,7 @@ const Navbar = () => {
                         <h1 className="font-serif font-bold text-xl text-slate-900 tracking-tight">EnviroSummit</h1>
                         <p className="text-[10px] uppercase tracking-[0.2em] text-teal-600 font-bold mt-0.5">2026 • MIT-WPU</p>
                     </div>
-                </div>
+                </Link>
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-1 bg-white/50 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/50 shadow-sm">
@@ -60,6 +63,17 @@ const Navbar = () => {
                             {link.name}
                         </a>
                     ))}
+                    <Link
+                        to="/track-finder"
+                        className={cn(
+                            "text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 flex items-center gap-2",
+                            location.pathname === '/track-finder'
+                                ? "bg-indigo-100 text-indigo-700 shadow-inner"
+                                : "text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                        )}
+                    >
+                        <Sparkles size={14} /> AI Track Finder
+                    </Link>
                 </div>
 
                 {/* CTA */}
@@ -71,9 +85,48 @@ const Navbar = () => {
                     >
                         Register Now
                     </Button>
-                    {/* Mobile Menu Toggle would go here */}
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className="md:hidden p-2 text-slate-600"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
                 </div>
             </div>
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+                <div className="absolute top-full left-0 right-0 bg-white border-b border-slate-200 shadow-xl p-4 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-2">
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
+                            className="text-left py-2 font-medium text-slate-600 border-b border-slate-100"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            {link.name}
+                        </a>
+                    ))}
+                    <Link
+                        to="/track-finder"
+                        className="text-left py-2 font-medium text-indigo-600 border-b border-slate-100 flex items-center gap-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                        <Sparkles size={16} /> AI Track Finder
+                    </Link>
+                    <div className="flex flex-col gap-3 mt-2">
+                        <Button className="w-full justify-center" onClick={() => { setIsMobileMenuOpen(false); openWizard('abstract'); }}>Submit Abstract</Button>
+                        <Button
+                            className="w-full bg-slate-900 text-white rounded-xl"
+                            onClick={() => { setIsMobileMenuOpen(false); openWizard('register'); }}
+                        >
+                            Register Now
+                        </Button>
+                    </div>
+                </div>
+            )}
         </nav>
     )
 }

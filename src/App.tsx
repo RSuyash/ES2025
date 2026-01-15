@@ -1,33 +1,34 @@
-import { lazy } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import Layout from './components/layout/Layout'
-import Hero from './sections/Hero'
-import Mission from './sections/Mission'
-import PastSummit from './sections/PastSummit'
-import ValueProps from './sections/ValueProps'
-import SocialProof from './sections/SocialProof'
-import Participation from './sections/Participation'
 import { SummitProvider } from './context/SummitContext'
+import Home from './pages/Home'
+import TrackFinder from './pages/TrackFinder'
 
-// Lazy Load Heavy Sections
-const ConferenceThemes = lazy(() => import('./sections/themes/ConferenceThemes'))
-const ResearchAdvisoryCommittee = lazy(() => import('./sections/ResearchAdvisoryCommittee'))
-const SocialMediaFeed = lazy(() => import('./sections/SocialMediaFeed'))
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function App() {
   return (
     <SummitProvider>
-      <Layout>
-        <Hero />
-        <Mission />
-        <PastSummit />
-        <ValueProps />
-        <SocialProof />
+      <Router>
+        {/* Ensures page scrolls to top on navigation */}
+        <ScrollToTop />
 
-        <ConferenceThemes />
-        <ResearchAdvisoryCommittee />
-        <Participation />
-        <SocialMediaFeed />
-      </Layout>
+        {/* Layout wraps everything so Navbar/Footer persist */}
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/track-finder" element={<TrackFinder />} />
+          </Routes>
+        </Layout>
+
+      </Router>
     </SummitProvider>
   )
 }
