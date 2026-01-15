@@ -1,15 +1,16 @@
-
+import { lazy } from 'react'
 import Layout from './components/layout/Layout'
 import Hero from './sections/Hero'
 import Mission from './sections/Mission'
 import PastSummit from './sections/PastSummit'
 import ValueProps from './sections/ValueProps'
 import SocialProof from './sections/SocialProof'
-import ConferenceThemes from './sections/themes/ConferenceThemes'
-import PlenarySpeakers from './sections/PlenarySpeakers'
-import ResearchAdvisoryCommittee from './sections/ResearchAdvisoryCommittee'
 import Participation from './sections/Participation'
-import SocialMediaFeed from './sections/SocialMediaFeed'
+
+// Lazy Load Heavy Sections
+const ConferenceThemes = lazy(() => import('./sections/themes/ConferenceThemes'))
+const ResearchAdvisoryCommittee = lazy(() => import('./sections/ResearchAdvisoryCommittee'))
+const SocialMediaFeed = lazy(() => import('./sections/SocialMediaFeed'))
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
       <PastSummit />
       <ValueProps />
       <SocialProof />
+
       <ConferenceThemes />
-      <PlenarySpeakers />
       <ResearchAdvisoryCommittee />
       <Participation />
       <SocialMediaFeed />

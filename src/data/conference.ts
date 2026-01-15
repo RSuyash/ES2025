@@ -39,7 +39,7 @@ export const CONFERENCE_DATA = {
         stats: {
             participants: "250+",
             countries: "06",
-            states: "31"
+            states: "28"
         },
         description: "EnviroSummit 2024, organized by MIT World Peace University (MIT-WPU), Pune, served as a dynamic platform uniting researchers, policymakers, industry experts, and students to address pressing environmental and climate challenges. The summit featured insightful keynote sessions, paper presentations, and interactive panels on sustainability, climate action, biodiversity conservation, renewable energy, and water security."
     }

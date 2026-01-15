@@ -1,98 +1,58 @@
-import { Button } from "../components/ui/Button"
-import Section from "../components/ui/Section"
-import { FileText, Users } from "lucide-react"
-import { HeroBackground } from "../components/ui/HeroBackground"
 import { useState } from "react"
-import { Modal } from "../components/ui/Modal"
-import { AbstractSubmissionWizard } from "../components/wizards/AbstractSubmissionWizard"
-import { RegistrationWizard } from "../components/wizards/RegistrationWizard"
-import { CONFERENCE_DATA } from "../data/conference"
+import { LivelyHero } from "./hero-experiments/LivelyHero"
+import { FluidBioHero } from "./hero-experiments/FluidBioHero"
+import { PeacockHero } from "./hero-experiments/PeacockHero"
+import { EcoMinimalHero } from "./hero-experiments/EcoMinimalHero"
+import { PeacockLightHero } from "./hero-experiments/PeacockLightHero"
+import { PeacockAbstractHero } from "./hero-experiments/PeacockAbstractHero"
+import { PeacockMaximalHero } from "./hero-experiments/PeacockMaximalHero"
+import { Palette } from "lucide-react"
 
 const Hero = () => {
-    const [wizardOpen, setWizardOpen] = useState<'abstract' | 'register' | null>(null);
+    // Styles: lively, fluid, peacock (dark), minimal, peacock-light, peacock-abstract, peacock-maximal
+    const [style, setStyle] = useState<'lively' | 'fluid' | 'peacock' | 'minimal' | 'peacock-light' | 'peacock-abstract' | 'peacock-maximal'>('peacock-maximal');
+
+    const toggleStyle = () => {
+        if (style === 'lively') setStyle('fluid');
+        else if (style === 'fluid') setStyle('peacock');
+        else if (style === 'peacock') setStyle('peacock-abstract');
+        else if (style === 'peacock-abstract') setStyle('peacock-light');
+        else if (style === 'peacock-light') setStyle('peacock-maximal');
+        else if (style === 'peacock-maximal') setStyle('minimal');
+        else setStyle('lively');
+    }
+
+    const getNextStyleName = () => {
+        if (style === 'lively') return 'Fluid Bio';
+        if (style === 'fluid') return 'Peacock (Dark)';
+        if (style === 'peacock') return 'Peacock (Abstract)';
+        if (style === 'peacock-abstract') return 'Peacock (Light)';
+        if (style === 'peacock-light') return 'Peacock (Maximal)';
+        if (style === 'peacock-maximal') return 'Eco Minimal';
+        return 'Lively';
+    }
 
     return (
-        <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-            {/* Background Overlay - Abstract Academic */}
-            <HeroBackground />
-
-            <Section className="relative z-10 w-full">
-                <div className="max-w-4xl mx-auto text-center">
-
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/80 backdrop-blur-sm border border-slate-200 mb-8 animate-fade-in-up">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">
-                            International Conference • {CONFERENCE_DATA.year}
-                        </span>
-                    </div>
-
-                    <h1 className="font-serif text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight relative">
-                        <span className="relative inline-block">
-                            <span className="text-primary">E</span>
-                            nviro
-                        </span>
-                        <span className="text-primary">Summit</span>
-                    </h1>
-
-                    <p className="text-xl md:text-2xl text-slate-600 mb-8 font-light text-balance max-w-2xl mx-auto leading-relaxed">
-                        Bridging the gap between academic research, policy frameworks, and sustainable community action.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-                        <Button
-                            size="lg"
-                            className="group relative overflow-hidden w-full sm:w-auto min-w-[200px]"
-                            onClick={() => setWizardOpen('abstract')}
-                        >
-                            <FileText size={20} className="mr-2" />
-                            Submit Abstract
-                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                        </Button>
-                        <Button
-                            variant="outline"
-                            size="lg"
-                            className="w-full sm:w-auto min-w-[200px] border-slate-300 hover:bg-white/50 backdrop-blur-sm"
-                            onClick={() => setWizardOpen('register')}
-                        >
-                            <Users size={20} className="mr-2" />
-                            Register as Participant
-                        </Button>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-500 max-w-2xl mx-auto border-t border-slate-200/60 pt-8">
-                        <div className="flex flex-col items-center">
-                            <span className="font-semibold text-slate-900">Hybrid Mode</span>
-                            <span>{CONFERENCE_DATA.mode}</span>
-                        </div>
-                        <div className="flex flex-col items-center border-l md:border-l border-slate-200/60 border-t md:border-t-0 pt-4 md:pt-0">
-                            <span className="font-semibold text-slate-900">{CONFERENCE_DATA.venue.split(',')[0]}</span>
-                            <span>{CONFERENCE_DATA.venue.split(',')[1]}</span>
-                        </div>
-                        <div className="flex flex-col items-center border-l md:border-l border-slate-200/60 border-t md:border-t-0 pt-4 md:pt-0">
-                            <span className="font-semibold text-slate-900">{CONFERENCE_DATA.dates}</span>
-                            <span className="text-emerald-600 font-medium">Reg Ends: {CONFERENCE_DATA.deadlines.registration}</span>
-                        </div>
-                    </div>
-                </div>
-            </Section>
-
-            {/* Wizards */}
-            <Modal
-                isOpen={wizardOpen === 'abstract'}
-                onClose={() => setWizardOpen(null)}
-                title="Submit Your Abstract"
+        <div className="relative">
+            {/* Style Switcher (Floating) */}
+            <button
+                onClick={toggleStyle}
+                className="fixed top-24 right-4 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-xl hover:bg-white/20 transition-all group"
+                title="Switch Hero Style"
             >
-                <AbstractSubmissionWizard onClose={() => setWizardOpen(null)} />
-            </Modal>
+                <Palette className="w-5 h-5 text-emerald-600" />
+                <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
+                    Try {getNextStyleName()} Style
+                </span>
+            </button>
 
-            <Modal
-                isOpen={wizardOpen === 'register'}
-                onClose={() => setWizardOpen(null)}
-                title="Conference Registration"
-            >
-                <RegistrationWizard onClose={() => setWizardOpen(null)} />
-            </Modal>
+            {style === 'lively' && <LivelyHero />}
+            {style === 'fluid' && <FluidBioHero />}
+            {style === 'peacock' && <PeacockHero />}
+            {style === 'minimal' && <EcoMinimalHero />}
+            {style === 'peacock-light' && <PeacockLightHero />}
+            {style === 'peacock-abstract' && <PeacockAbstractHero />}
+            {style === 'peacock-maximal' && <PeacockMaximalHero />}
         </div>
     )
 }
