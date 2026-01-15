@@ -57,7 +57,7 @@ export const PlenarySpeakerCard = ({ speaker, index }: { speaker: any, index: nu
 
 const PlenarySpeakers = () => {
     return (
-        <section id="plenary-speakers" className="py-24 bg-white relative overflow-hidden">
+        <section id="speakers" className="py-24 bg-white relative overflow-hidden">
             {/* Background Texture */}
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
                 style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }}>
