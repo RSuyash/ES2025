@@ -207,13 +207,18 @@ export const PeacockMaximalHero = () => {
                         <InfoCard className="col-span-2 flex items-center justify-between p-4" delay={0.8}>
                             <div>
                                 <div className="flex items-center gap-1.5 mb-1">
-                                    <Clock size={12} className="text-rose-500" />
-                                    <span className="text-[9px] font-bold uppercase text-rose-500 tracking-wider">Deadline Approaching</span>
+                                    <Clock size={12} className="text-rose-500 animate-pulse" />
+                                    <span className="text-[9px] font-bold uppercase text-rose-500 tracking-wider">URGENT</span>
                                 </div>
                                 <div className="text-base font-bold text-slate-900">Abstract Submission</div>
                                 <div className="text-xs text-slate-500">{CONFERENCE_DATA.deadlines.abstract}</div>
                             </div>
-                            <div className="h-8 w-8 rounded-full border-[3px] border-rose-100 border-t-rose-500 animate-spin" /> {/* Abstract visual timer */}
+                            <div className="relative flex items-center justify-center">
+                                <div className="absolute h-10 w-10 rounded-full bg-rose-500/20 animate-ping" />
+                                <div className="relative h-8 w-8 rounded-full bg-gradient-to-br from-rose-500 to-orange-500 shadow-lg shadow-rose-500/50 animate-pulse flex items-center justify-center">
+                                    <span className="text-white text-[10px] font-bold">!</span>
+                                </div>
+                            </div>
                         </InfoCard>
 
                     </div>
